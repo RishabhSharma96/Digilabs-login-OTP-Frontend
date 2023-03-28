@@ -33,13 +33,18 @@
     outline: none;
 }
 
-.info {
+.info,
+.info-grey {
     background-color: white;
     border: none;
     color: #0858F7;
     font-weight: bolder;
     margin: 20px 0;
     cursor: pointer;
+}
+
+.info-grey {
+    color: grey;
 }
 
 .info-back {
@@ -98,31 +103,34 @@
     }
 }
 
-@media(max-width:445px){
-    .left-content{
+@media(max-width:445px) {
+    .left-content {
         margin-left: 0;
     }
+
     .info-back {
         margin-left: 10rem;
     }
 }
 
 @media (max-width:400px) {
-    .left-content{
+    .left-content {
         left: -2rem;
         margin-left: 30px;
     }
 
-    .otp-mail-data{
+    .otp-mail-data {
         width: 18rem;
     }
+
     .otp-field {
         height: 3rem;
         width: 2.5rem;
         margin-left: 5px;
         font-size: 2rem;
     }
-    .otp-btn{
+
+    .otp-btn {
         width: 18rem;
     }
 }

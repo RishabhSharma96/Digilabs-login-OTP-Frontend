@@ -14,7 +14,7 @@ function LoginArea() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [showPassword, setShowPassword] = useState(false)
-    const [openLoader,setOpenLoader] = useState(true)
+    const [openLoader, setOpenLoader] = useState(true)
 
     useEffect(() => {
         setTimeout(() => {
@@ -22,47 +22,73 @@ function LoginArea() {
         }, 1700);
     }, [])
 
-    const navigate = useNavigate()
+    const [storeMail, setstoreMail] = useState("")
+    const [storePassword, setstorePassword] = useState("")
+    const navigate = useNavigate();
+
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
         console.log(showPassword)
     }
 
-    const handleLogin = (e) => {
-        e.preventDefault()
-        const userEmail = email + "@heads.design"
+    const handleLogin = () => {
 
-        if (email === "" || password === "") {
+        if ((email == "" && password == "") && (storeMail == "" && storePassword == "")) {
             toast.error("Please enter all the credentials")
+            return;
         }
-        else {
-            if (userEmail === "rishabh@heads.design" && password === "12345678") {
-                localStorage.setItem("email", userEmail)
-                localStorage.setItem("password", password)
-                toast.success(`An OTP has been send to ${userEmail}`)
-                navigate("/otp-verification", {
-                    state: {
-                        email: userEmail,
-                    }
-                })
-            }
-            else {
-                toast.error("Credentials did not match")
-            }
+        var userEmail = email + "@heads.design";
+        localStorage.setItem("localEmail", JSON.stringify(email));
+        localStorage.setItem("localPassword", JSON.stringify(password));
+
+        var storeMailAddress = storeMail
+        storeMailAddress = storeMailAddress + "@heads.design"
+        if (userEmail === "rishabh@heads.design" && password === "rishabh") {
+            toast.success(`An OTP has been send to ${userEmail}`)
+            setEmail("");
+            navigate('/otp-verification', {
+                state: {
+                    email,
+                    password
+                }
+            })
         }
+        else if (storeMailAddress === "rishabh@heads.design" && storePassword === "rishabh") {
+            setEmail("");
+            setPassword("");
+            navigate('/otp-verification', {
+                state: {
+                    email,
+                    password
+                }
+            })
+        }
+        else
+            toast.error("Credentials did not match")
     }
 
+
+    useEffect(() => {
+        var a = JSON.parse(localStorage.getItem('localEmail'));
+        var b = JSON.parse(localStorage.getItem('localPassword'));
+        setstoreMail(a);
+        setstorePassword(b);
+        console.log(storeMail);
+        console.log(storePassword);
+    }, []);
+
+
     if (openLoader)
-    return <LoaderScreen />
+        return <LoaderScreen />
 
     return (
         <div className='login-box'>
             <div className='login-main'>
-                <motion.div transition={{duration:0.8}} animate={{ scale: 1 }} initial={{ scale: 0 }} className='left-content'>
+                <motion.div transition={{ duration: 0.8 }} animate={{ scale: 1 }} initial={{ scale: 0 }} className='left-content'>
                     <p data-text="Welcome to Systempackage" className="login-heading"><strong>
                         Welcome to Systempackage
-                        </strong></p>
+                    </strong></p>
                     <div className="email-end">
                         @heads.design
                         &nbsp; <i className='fa fa-angle-down'></i></div>
@@ -70,30 +96,30 @@ function LoginArea() {
                         type="text"
                         placeholder='Enter your email'
                         className="emailArea"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={storeMail != "" ? storeMail : email}
+                        onChange={(e) => storeMail != "" ? setstoreMail(e.target.value) : setEmail(e.target.value)}
                     />
                     <i className={showPassword ? "eye fa fa-eye" : "eye fa fa-eye-slash"} onClick={handleShowPassword}></i>
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder='Enter your password'
                         className="passwordArea"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={storePassword != "" ? storePassword : password}
+                        onChange={(e) => storePassword != "" ? setstorePassword(e.target.value) : setPassword(e.target.value)}
                     />
                     <button className='login-btn' onClick={handleLogin}><p>Next</p> &nbsp;
-                        <span><i className="arrow-right fa fa-solid fa-arrow-right" style={{ color: "white" }}></i></span>
+                        <span><i className="arrow-right fa fa-solstoreMailAddress fa-arrow-right" style={{ color: "white" }}></i></span>
                     </button>
                     <p className="forgetPasswordArea">Forgot your Password?</p>
                 </motion.div>
-                <motion.div transition={{duration:0.8}} animate={{ scale: 1 }} initial={{ scale: 0 }} class="right-content">
+                <motion.div transition={{ duration: 0.8 }} animate={{ scale: 1 }} initial={{ scale: 0 }} class="right-content">
                     <img src={foregroundImage} className="image1" />
                     <img src={BackgroundImage1} className="image2" />
                     <img src={BackgroundImage2} className="image3" />
                 </motion.div>
             </div>
 
-            <motion.div transition={{duration:0.8}} animate={{ scale: 1 }} initial={{ scale: 0 }} className="footer-text">
+            <motion.div transition={{ duration: 0.8 }} animate={{ scale: 1 }} initial={{ scale: 0 }} className="footer-text">
                 <span className='first'>Not Member?</span><span className='second'> Create Account</span>
             </motion.div>
 

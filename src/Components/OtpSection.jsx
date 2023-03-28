@@ -55,10 +55,10 @@ function OtpSection() {
         e.preventDefault()
 
         const otpString = otp.join("")
-        // console.log(otpString);
-        // console.log(typeof (otpString))
 
         if (otpString === "111111") {
+            localStorage.removeItem("localEmail");
+            localStorage.removeItem("localPassword");
             toast.success("Login Successful !!")
             navigate("/success")
         }
@@ -107,7 +107,10 @@ function OtpSection() {
                             >Verify My OTP</button>
                             <p>
 
-                                <button disabled={!isTimer} className="info" onClick={()=>{setTimer(20)}}>
+                                <button disabled={!isTimer} className={!isTimer ? "info-grey" : "info"} onClick={() => {
+                                    setTimer(20)
+                                    setIsTimer(!isTimer)
+                                }} >
                                     {!isTimer ? "Resend OTP in " : "Send OTP Now"}
                                 </button>
 
