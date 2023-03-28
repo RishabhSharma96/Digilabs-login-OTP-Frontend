@@ -22,62 +22,36 @@ function LoginArea() {
         }, 1700);
     }, [])
 
-    const [storeMail, setstoreMail] = useState("")
-    const [storePassword, setstorePassword] = useState("")
-    const navigate = useNavigate();
-
+    const navigate = useNavigate()
 
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
         console.log(showPassword)
     }
 
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const userEmail = email + "@heads.design"
 
-        if ((email == "" && password == "") && (storeMail == "" && storePassword == "")) {
+        if (email === "" || password === "") {
             toast.error("Please enter all the credentials")
-            return;
         }
-        var userEmail = email + "@heads.design";
-        localStorage.setItem("localEmail", JSON.stringify(email));
-        localStorage.setItem("localPassword", JSON.stringify(password));
-
-        var storeMailAddress = storeMail
-        storeMailAddress = storeMailAddress + "@heads.design"
-        if (userEmail === "rishabh@heads.design" && password === "rishabh") {
-            toast.success(`An OTP has been send to ${userEmail}`)
-            setEmail("");
-            navigate('/otp-verification', {
-                state: {
-                    email,
-                    password
-                }
-            })
+        else {
+            if (userEmail === "rishabh@heads.design" && password === "rishabh") {
+                localStorage.setItem("email", userEmail)
+                localStorage.setItem("password", password)
+                toast.success(`An OTP has been send to ${userEmail}`)
+                navigate("/otp-verification", {
+                    state: {
+                        email: userEmail,
+                    }
+                })
+            }
+            else {
+                toast.error("Credentials did not match")
+            }
         }
-        else if (storeMailAddress === "rishabh@heads.design" && storePassword === "rishabh") {
-            setEmail("");
-            setPassword("");
-            navigate('/otp-verification', {
-                state: {
-                    email,
-                    password
-                }
-            })
-        }
-        else
-            toast.error("Credentials did not match")
     }
-
-
-    useEffect(() => {
-        var a = JSON.parse(localStorage.getItem('localEmail'));
-        var b = JSON.parse(localStorage.getItem('localPassword'));
-        setstoreMail(a);
-        setstorePassword(b);
-        console.log(storeMail);
-        console.log(storePassword);
-    }, []);
-
 
     if (openLoader)
         return <LoaderScreen />
@@ -96,19 +70,19 @@ function LoginArea() {
                         type="text"
                         placeholder='Enter your email'
                         className="emailArea"
-                        value={storeMail != "" ? storeMail : email}
-                        onChange={(e) => storeMail != "" ? setstoreMail(e.target.value) : setEmail(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <i className={showPassword ? "eye fa fa-eye" : "eye fa fa-eye-slash"} onClick={handleShowPassword}></i>
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder='Enter your password'
                         className="passwordArea"
-                        value={storePassword != "" ? storePassword : password}
-                        onChange={(e) => storePassword != "" ? setstorePassword(e.target.value) : setPassword(e.target.value)}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <button className='login-btn' onClick={handleLogin}><p>Next</p> &nbsp;
-                        <span><i className="arrow-right fa fa-solstoreMailAddress fa-arrow-right" style={{ color: "white" }}></i></span>
+                        <span><i className="arrow-right fa fa-solid fa-arrow-right" style={{ color: "white" }}></i></span>
                     </button>
                     <p className="forgetPasswordArea">Forgot your Password?</p>
                 </motion.div>
