@@ -1,0 +1,128 @@
+.otp-heading {
+    width: 25rem;
+    font-size: 2rem;
+}
+
+.otp-mail-data {
+    width: 25rem;
+    color: grey;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.email {
+    font-weight: bolder;
+    color: #0858F7;
+}
+
+.otp-field {
+    height: 3.5rem;
+    width: 3rem;
+    border: 2px solid #a9bfec;
+    color: grey;
+    margin-left: 10px;
+    border-radius: 1rem;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.otp-field:focus {
+    -webkit-box-shadow: 0 0 5px #0858F7;
+    box-shadow: 0 0 5px #0858F7;
+    outline: none;
+}
+
+.info {
+    background-color: white;
+    border: none;
+    color: #0858F7;
+    font-weight: bolder;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.info-back {
+    margin-left: 15rem;
+}
+
+.timer {
+    font-weight: bolder;
+    color: grey;
+    margin-top: -1rem;
+}
+
+@media(max-width : 400px) {
+    .otp-box {
+        margin-left: 2rem;
+    }
+
+    .otp-heading {
+        width: 23rem;
+        font-size: 1.8rem;
+    }
+
+    .otp-mail-data {
+        width: 23rem;
+        color: grey;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.timer-blinker {
+    margin-left: 4px;
+    position: relative;
+    display: inline-block;
+    color: black;
+    font-size: 1rem;
+    text-transform: uppercase;
+    animation: animate 1s ease-in-out infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(360deg);
+    }
+
+    20% {
+        transform: translateY(-10px);
+
+    }
+
+    40%,
+    100% {
+        font-size: 0rem;
+        transform: rotateZ(360deg);
+
+    }
+}
+
+@media(max-width:445px){
+    .left-content{
+        margin-left: 0;
+    }
+    .info-back {
+        margin-left: 10rem;
+    }
+}
+
+@media (max-width:400px) {
+    .left-content{
+        left: -2rem;
+        margin-left: 30px;
+    }
+
+    .otp-mail-data{
+        width: 18rem;
+    }
+    .otp-field {
+        height: 3rem;
+        width: 2.5rem;
+        margin-left: 5px;
+        font-size: 2rem;
+    }
+    .otp-btn{
+        width: 18rem;
+    }
+}
