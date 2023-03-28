@@ -337,6 +337,10 @@ select:focus {
         margin-top: 6rem;
         margin-left: 21rem;
     }
+
+    .forgetPasswordArea{
+        margin-left: 0rem;
+    }
 }
 
 @media(max-width : 480px) {

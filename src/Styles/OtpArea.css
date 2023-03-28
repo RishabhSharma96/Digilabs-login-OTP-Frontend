@@ -103,24 +103,11 @@
     }
 }
 
-@media(max-width:445px) {
-    .left-content {
-        margin-left: 0;
-    }
-
-    .info-back {
-        margin-left: 10rem;
-    }
-}
 
 @media (max-width:400px) {
     .left-content {
         left: -2rem;
-        margin-left: 30px;
-    }
-
-    .otp-mail-data {
-        width: 18rem;
+        margin-left: 15%
     }
 
     .otp-field {
@@ -131,6 +118,31 @@
     }
 
     .otp-btn {
+        width: 20rem;
+    }
+}
+
+@media(max-width:445px) {
+    .left-content {
+        margin-left: 10px;
+    }
+
+    .info-back {
+        margin-left: 10rem;
+    }
+    .otp-mail-data {
+        width: 20rem;
+    }
+}
+
+@media(max-width:370px) {
+    .left-content {
+        margin-left: 30px;
+    }
+    .otp-btn{
+        width: 18rem;
+    }
+    .otp-mail-data {
         width: 18rem;
     }
 }
